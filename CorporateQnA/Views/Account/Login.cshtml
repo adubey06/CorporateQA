@@ -1,0 +1,70 @@
+﻿@model CorporateQnA.Models.UserLogin
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<html>
+<head>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+    <div class="fluid-container d-flex m-0 p-0">
+        <div class="vw-75 p-0 " style="background-color:#75618a">
+            <div class="w-70 vh-100 background-branding-container">
+                <img src="~/keka-big.png">
+                <div class="logo display-4 sub-logo">
+                    Corporate QnA
+                </div>
+            </div>
+        </div>
+        <div class="login-container-layout">
+            <div class="vw-30 login-container m-5">
+                <div class="logo display-4">
+                    Corporate QnA
+                </div>
+                <h4 class="d-block login-heading">Login</h4>
+                <form class="registration-form" method="post" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-ctrl">
+                        <input asp-for="Email" class="form-control" type="text" placeholder=" ">
+                        <label asp-for="Email">Email</label>
+                    </div>
+                    <div class="form-ctrl">
+                        <input asp-for="Password" class="form-control" placeholder=" ">
+                        <label asp-for="Password">Password</label>
+                    </div>
+                    <button type="submit" class="btn btn-success px-5">Login</button>
+                </form>
+                <hr />
+                @if (Model.ExternalLogins.Count > 0)
+                {
+                    <h4 class="mb-4">External Login</h4>
+                    <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                        <div>
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Login using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+                        </div>
+                    </form>
+                }
+                <hr />
+                <a href="register">Create New Account</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

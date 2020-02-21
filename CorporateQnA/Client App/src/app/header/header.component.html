@@ -1,0 +1,14 @@
+
+<header class="header-container">
+    <div class = "keka-logo-container" (click)="refresh()">
+        <img src="../../assets/images/keka_logo.png" alt="keka" class="keka-logo">
+    </div>
+    <div class="user-options">
+        <div class="date-text">{{currentDate}}</div>
+        <img src="../../assets/images/sun_logo.png" alt="sun-logo" class="sun-logo">
+        <div class="user-profile" (click)="logout()">
+            <div>{{loginService.loggedInUserDetail.username}}<a class="logout" href="logout">(Logout)</a></div>
+            <img src="{{loginService.loggedInUserDetail.profileImage}}" alt="img" class="user-image rounded-circle mx-3">
+        </div>
+    </div>
+</header>

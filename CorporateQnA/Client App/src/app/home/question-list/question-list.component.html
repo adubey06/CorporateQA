@@ -1,0 +1,29 @@
+
+<ul class="list-group">
+    <li class="list-group-item question-list-item" [ngClass]="{'resolved-tag': question.resolved }"  *ngFor='let question of questions' routerLinkActive="active-question">
+       
+        <div class="d-inline-flex question-list-box">
+            <div class="question-info">
+                <img src="{{question.profileImage}}" alt="" class="rounded-circle user-image ">
+                <span class="fa fa-angle-up vote-icon" [ngClass]="{'status':question.status == 1}" (click)="like(question)"></span>
+                <span>{{question.upvotes}}</span>
+                <span class="fa fa-angle-down vote-icon mt-0" [ngClass]="{'status':question.status == 2}" (click)="dislike(question)"></span>
+            </div>
+            <div class="question-list-box cp" [routerLink]="['/home/question',question.id]">
+                <div class="question">
+                    <p class="question-title">{{question.title}}</p>
+                    <p class="question-description mr-3" [innerHTML]="question.description"></p>
+                </div>
+                <div class="question-additional-info d-inline-flex">
+                    <div class="views">
+                        <span class="fa fa-eye"></span>
+                        <span class="views-count">{{question.totalViews}} Views</span>
+                    </div>
+                    <div class="card bg-light pl-2 pr-2 answers-total ml-3 mt-1">{{question.totalAnswers}} Answers</div>
+                </div>
+                <div class="small-text grey-text float-right">{{question.askedOn}}</div>
+                <div class="small-text font-weight-bold float-right mr-3 text-success" *ngIf="question.resolved">Resolved</div>
+            </div>
+        </div>
+    </li>
+ </ul>

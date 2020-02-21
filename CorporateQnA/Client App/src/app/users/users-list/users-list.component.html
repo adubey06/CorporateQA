@@ -1,0 +1,10 @@
+<div class="option-container d-flex bottom-border">
+    <div class="option-box col-3">
+        <span class="option-label">Users</span>
+        <div class="form-group search-symbol pb-2 mb-2">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" (keyup)="search($event)" class="form-control" placeholder="Search">
+        </div>
+    </div>
+</div>
+<app-users-list-container [usersdata] ="usersData"></app-users-list-container>

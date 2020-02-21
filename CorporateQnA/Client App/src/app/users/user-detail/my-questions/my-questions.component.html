@@ -1,0 +1,11 @@
+<div class="content-container d-inline-flex mx-4">
+
+    <div class="col-7 p-0">
+        <app-question-list [questions] = "questionInfoServices.questionList" [routeUrl]="routeUrl"></app-question-list>
+    </div>
+
+    <div class="col-5 p-0">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

@@ -1,0 +1,68 @@
+<div class="card question-detail-container">
+    <div class="question-display px-3 pt-3 pb-5">
+        <div class="d-inline-flex">
+            <img src="{{question.profileImage}}" alt="" class="rounded-circle user-image ">
+            <span class="user-name mr-2 ml-1">{{question.askedBy}}</span>
+            <span class="small-text grey-text mt-1">{{question.askedOn}}</span>
+        </div>
+        <div class="float-right">
+            <img src="../../../../assets/images/report.png" alt="report" class="report-image mr-1">
+            <span class="small-text grey-text">Report this</span>
+        </div>
+        <div class="question mt-2">
+            <p class="question-title">{{question.title}}</p>
+            <p class="question-description full-description" [innerHTML]="question.description"></p>
+            <div class="card small-text bg-light p-1 small-text d-inline-block position-absolute" *ngIf="question.resolved">Resolved</div>
+        </div>
+    </div>
+    <div class="border-top border-bottom pl-3 pr-3 pb-1 pt-1 answers-count">
+        Answers ({{question.totalAnswers}})
+    </div>
+    <ul class="answers-list">
+        <li class="p-3 border-bottom" *ngFor='let answer of answers'>
+            <div class="d-inline-flex">
+                <img src="{{answer.profileImage}}" alt="" class="rounded-circle user-image ">
+                <span class="user-name mr-3 ml-1">{{answer.answeredBy}}</span>
+                <span class="small-text grey-text mt-1">{{answer.answeredOn}}</span>
+            </div>
+            <div class="popularity mt-1 float-right ">
+                <i (click)="like(answer)" class="fa fa-thumbs-up ml-2 mr-2 cp" [ngClass]="{'like':answer.status==1}" aria-hidden="true">  </i>{{answer.likes}}<i (click)="dislike(answer)" class="fa fa-thumbs-down ml-3 mr-2 cp" [ngClass]="{'dislike':answer.status==2}" aria-hidden="true">  </i>{{answer.dislikes}}
+            </div>
+            <div class="answer-description small-text ml-5 mt-1" [innerHTML]="answer.description">
+            </div>
+            <div class="custom-control custom-checkbox ml-5 mt-3" *ngIf="userId == question.askedById; else show_best_label">
+                <input type="checkbox" class="custom-control-input" id="{{answer.id}}" [checked]="answer.best" (change)="markBest(answer)">
+                <label class="custom-control-label small-text mt-1" for="{{answer.id}}">Mark as Best</label>
+            </div>
+            <ng-template #show_best_label>
+                <div class="card bg-light p-1 small-text d-inline-block mt-3 ml-5" *ngIf="answer.best">Best Answer</div>
+            </ng-template>
+        </li>
+    </ul>
+
+    <div class="card mx-3 mb-3">
+        <form class="text-capitalize" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
+            <quill-editor class="answer-text-box border-0" placeholder="Enter your answer here" formControlName="description">
+                <div quill-editor-toolbar class="border-0">
+                    <div quill-editor-element class="ql-container ql-snow">
+                    </div>
+                    <select class="ql-size border-right">
+                        <option value="small"></option>
+                        <option value="large"></option>
+                        <option value="huge"></option>
+                    </select>
+                    <button class="ql-bold"></button>
+                    <button class="ql-italic"></button>
+                    <button class="ql-underline border-right pr-2 mr-2"></button>
+                    <button class="ql-list" value="ordered"></button>
+                    <button class="ql-list border-right pr-2 mr-2" value="bullet"></button>
+                    <button class="ql-blockquote"></button>
+                    <button class="ql-link"></button>
+                    <button type="submit" class="send-button float-right" [disabled]="!answerForm.valid"><img src="../../../assets/images/send.svg" alt="send" class="mb-2"></button>
+                </div>
+            </quill-editor>
+            <!-- <textarea class="answer-text-box" placeholder="Enter your answer here" formControlName="description"></textarea> -->
+
+        </form>
+    </div>
+</div>
