@@ -3,26 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Client App\dist\**" />
-    <Content Remove="Client App\dist\**" />
-    <EmbeddedResource Remove="Client App\dist\**" />
-    <None Remove="Client App\dist\**" />
-    <TypeScriptCompile Remove="Client App\dist\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Client App\src\app\shared\models\custom-validators.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Remove="Client App\src\app\shared\models\answer.model.ts" />
-    <TypeScriptCompile Remove="Client App\src\app\shared\models\question.model.ts" />
-    <TypeScriptCompile Remove="Client App\src\app\shared\models\show-options.model.ts" />
-    <TypeScriptCompile Remove="Client App\src\app\shared\models\sort-options.model.ts" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Dapper" Version="2.0.30" />
@@ -43,7 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CorporateQnA.Services\CorporateQnA.Services.csproj" />
+    <ProjectReference Include="..\CorporateQnA.Services\CorporateQnA.Services.csproj">
+      <ReferenceSourceTarget></ReferenceSourceTarget>
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
