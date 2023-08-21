@@ -13,6 +13,7 @@ using CorporateQnA.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -29,33 +30,25 @@ builder.Services.AddServices();
 builder.Services.AddTransient<IDbConnection>((connection) => new SqlConnection(builder.Configuration.GetConnectionString("DBConnection")));
 builder.Services.AddScoped<IRequestContext, RequestContext>();
 builder.Services.AddHttpContextAccessor();
-builder.Services.ConfigureApplicationCookie(opt => {
-    opt.LoginPath = "/login";
-});
-builder.Services.AddAuthentication().AddCookie(opt => {
-});
+builder.Services.AddAuthentication().AddCookie();
 builder.Services.AddAuthentication().AddGoogle(options =>
 {
     options.ClientId = "490082799116-c5jem6d5gfuokc500f6nhm7c4qfajdp9.apps.googleusercontent.com";
     options.ClientSecret = "_gpk67ROxx2OfYWczWxQ6uAR";
 });
-builder.Services.AddMvc();
-builder.Services.AddRazorPages();
+//builder.Services.AddMvc();
+//builder.Services.AddRazorPages();
 
 var app = builder.Build();
-app.UseSwagger();
-app.UseSwaggerUI();
-
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
 app.Run();
