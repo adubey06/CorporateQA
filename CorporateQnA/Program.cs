@@ -26,11 +26,10 @@ builder.Services.AddIdentity<AppUser, AppRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddServices();
-
+  
 builder.Services.AddTransient<IDbConnection>((connection) => new SqlConnection(builder.Configuration.GetConnectionString("DBConnection")));
 builder.Services.AddScoped<IRequestContext, RequestContext>();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddAuthentication().AddCookie();
 builder.Services.AddAuthentication().AddGoogle(options =>
 {
     options.ClientId = "490082799116-c5jem6d5gfuokc500f6nhm7c4qfajdp9.apps.googleusercontent.com";
