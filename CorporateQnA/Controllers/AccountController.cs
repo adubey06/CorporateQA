@@ -48,7 +48,14 @@ namespace CorporateQnA.Controllers
 
             return false;
         }
-                
+
+        [HttpGet("logout")]
+        public async Task<bool> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return true;
+        }
+
         //public IActionResult Register()
         //{
         //    return View();

@@ -10,7 +10,6 @@ namespace CorporateQnA.Controllers
     [ApiController]
     public class LoginInfoController : BaseController
     {
- 
         IUserServices _userServices;
         private IRequestContext _requestContext;
 
